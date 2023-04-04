@@ -1,32 +1,60 @@
-# Prerequisites
-*.d
+# include <iostream>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+using namespace std;
 
-# Precompiled Headers
-*.gch
-*.pch
+void Converter_Hora (int Seg_Total, int *Hor, int *Min, int *Seg)
+{
+    *Hor = Seg_Total / 3600;
+    *Min = (Seg_Total % 3600) / 60;
+    *Seg = (Seg_Total % 3600) % 60; 
+    
+}
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+void Pausar()
+{
+    char Pausa;
+    cout << "Pressione uma tecla para continuar..." << endl;
+    cin >> Pausa;
+}
 
-# Fortran module files
-*.mod
-*.smod
+void Menu()
+{
+    int Seg_Total, Opcao_Finalizar, Hora, Minuto, Segundo;
+    
+    do
+    {    
+        system("clear");
+        cout << "==================== Conversão de Segundos em Hora : Min : Seg ====================" << endl;
+        cout << "Digite a Quantidade de Segundos:" << endl;
+        cout << "Segundos: ";
+        cin >> Seg_Total;
+        
+        Converter_Hora(Seg_Total, &Hora, &Minuto, &Segundo);
+        cout << "HORAS : MINUTOS : SEGUNDOS" << endl;
+        cout << Hora << " : " << Minuto << " : " << Segundo << endl;
+        Pausar();
+        
+        do
+        {
+            system("clear");
+            cout << "Deseja sair?" << endl;
+            cout << "[1] Sim || [2] Não" << endl;
+            cout << "Resposta: ";
+            cin >> Opcao_Finalizar;
+            
+            if (Opcao_Finalizar != 1 && Opcao_Finalizar != 2)
+            {
+                cout << "Opção Inválida..." << endl;
+            }
+        } while (Opcao_Finalizar != 1 && Opcao_Finalizar != 2);
+    } while (Opcao_Finalizar != 1);
+}
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+int main()
+{
+    setlocale(LC_ALL, "Portuguese");
+    
+    Menu();
+    
+    return 0;
+}
